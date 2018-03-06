@@ -15,8 +15,9 @@
     "testw": "mocha -w --require ts-node/register --watch-extensions ts 'test/**/*.ts'",
     "release": "standard-version",
     "build": "run-s build:*",
+    "build:clean": "rm -rf lib dist",
     "build:ts": "tsc",
-    "build:dist": "browserify --standalone zipson lib/index.js > dist/zipson.js",
+    "build:dist": "mkdir dist && browserify --standalone zipson lib/index.js > dist/zipson.js",
     "build:utlify": "uglifyjs dist/zipson.js -c -m -o dist/zipson.min.js"
   },
   "repository": "jgranstrom/zipson",
