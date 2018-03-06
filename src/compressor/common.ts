@@ -27,11 +27,16 @@ export interface CompressOptions {
  * Map from discovered values to their respective reference identifiers
  */
 export interface InvertedIndex {
-  stringMap: Map<string, string>;
-  integerMap: Map<number, string>;
-  floatMap: Map<string, string>;
-  dateMap: Map<number, string>;
-  lpDateMap: Map<number, string>;
+  stringMap:  { [index: string]: string }
+  integerMap: { [index: number]: string }
+  floatMap:   { [index: string]: string }
+  dateMap:    { [index: number]: string }
+  lpDateMap:  { [index: number]: string }
+  stringCount: number;
+  integerCount: number;
+  floatCount: number;
+  dateCount: number;
+  lpDateCount: number;
 }
 
 /**

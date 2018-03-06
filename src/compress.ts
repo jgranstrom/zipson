@@ -36,11 +36,16 @@ export function makeCompressContext(): Context {
  */
 export function makeInvertedIndex(): InvertedIndex {
   return {
-    stringMap: new Map(),
-    integerMap: new Map(),
-    floatMap: new Map(),
-    dateMap: new Map(),
-    lpDateMap: new Map(),
+    stringMap: {},
+    integerMap: {},
+    floatMap: {},
+    dateMap: {},
+    lpDateMap: {},
+    stringCount: 0,
+    integerCount: 0,
+    floatCount: 0,
+    dateCount: 0,
+    lpDateCount: 0,
   }
 }
 

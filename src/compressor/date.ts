@@ -23,28 +23,30 @@ export function compressDate(
   const isLowPrecision = lowPrecisionDate % 1 === 0;
 
   if(isLowPrecision) {
-    if((foundRef = invertedIndex.lpDateMap.get(lowPrecisionDate))) {
+    if((foundRef = invertedIndex.lpDateMap[lowPrecisionDate]) !== void 0) {
       writer.write(`${REF_LP_DATE_TOKEN}${foundRef}`);
     } else {
-      const ref = compressInteger(invertedIndex.lpDateMap.size);
+      const ref = compressInteger(invertedIndex.lpDateCount);
       const compressedDate = compressInteger(lowPrecisionDate);
       const newRef = `${LP_DATE_TOKEN}${compressedDate}`;
       if(ref.length + REFERENCE_HEADER_LENGTH < newRef.length) {
-        invertedIndex.lpDateMap.set(lowPrecisionDate, ref);
+        invertedIndex.lpDateMap[lowPrecisionDate] = ref;
+        invertedIndex.lpDateCount++;
         writer.write(newRef)
       } else {
         writer.write(`${UNREFERENCED_LP_DATE_TOKEN}${compressedDate}`);
       }
     }
   } else {
-    if((foundRef = invertedIndex.dateMap.get(obj))) {
+    if((foundRef = invertedIndex.dateMap[obj]) !== void 0) {
       writer.write(`${REF_DATE_TOKEN}${foundRef}`)
     } else {
-      const ref = compressInteger(invertedIndex.dateMap.size);
+      const ref = compressInteger(invertedIndex.dateCount);
       const compressedDate = compressInteger(obj);
       const newRef = `${DATE_TOKEN}${compressedDate}`;
       if(ref.length + REFERENCE_HEADER_LENGTH < newRef.length) {
-        invertedIndex.dateMap.set(obj, ref);
+        invertedIndex.dateMap[obj] = ref;
+        invertedIndex.dateCount++;
         writer.write(newRef)
       } else {
         writer.write(`${UNREFERENCED_DATE_TOKEN}${compressedDate}`);

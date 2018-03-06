@@ -20,13 +20,14 @@ export function compressString(
   if(options.detectUtcTimestamps && obj[obj.length -1] === 'Z' && obj.match(DATE_REGEX)) {
     const date = Date.parse(obj);
     compressors.date(compressors, context, date, invertedIndex, writer, options);
-  } else if((foundRef = invertedIndex.stringMap.get(obj))) {
+  } else if((foundRef = invertedIndex.stringMap[obj]) !== void 0) {
     writer.write(`${REF_STRING_TOKEN}${foundRef}`)
   } else {
-    const ref = compressInteger(invertedIndex.stringMap.size);
+    const ref = compressInteger(invertedIndex.stringCount);
     const newRef = `${STRING_TOKEN}${obj.replace(REGEX_STRING_TOKEN, ESCAPED_STRING_TOKEN)}${STRING_TOKEN}`;
     if(ref.length + REFERENCE_HEADER_LENGTH + 1 < newRef.length) {
-      invertedIndex.stringMap.set(obj, ref);
+      invertedIndex.stringMap[obj] = ref;
+      invertedIndex.stringCount++;
       writer.write(newRef)
     } else {
       writer.write(`${UNREFERENCED_STRING_TOKEN}${obj.replace(REGEX_UNREFERENCED_STRING_TOKEN, ESCAPED_UNREFERENCED_STRING_TOKEN)}${UNREFERENCED_STRING_TOKEN}`);
