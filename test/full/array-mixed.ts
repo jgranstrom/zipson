@@ -1,8 +1,8 @@
-import { suite, test, only } from 'mocha-typescript';
+import { describe, it } from 'mocha';
 import { testPackUnpack } from './util';
 
-@suite class ArrayMixedSpec {
-  @test oneOfEach() {
+describe('array-mixed', function() {
+    it('oneOfEach', function() {
     testPackUnpack([
       1,
       null,
@@ -17,9 +17,9 @@ import { testPackUnpack } from './util';
       "foaisdjfoas'dfasd'f'dfs'adfasdf'",
       'aosdifjao"oijsdfioJ"sdfoij"',
     ]);
-  }
+  });
 
-  @test withRepititions() {
+  it('withRepititions', function() {
     testPackUnpack([
       1,
       1,
@@ -49,5 +49,5 @@ import { testPackUnpack } from './util';
       { x: 123 },
       1029831209,
     ]);
-  }
-}
+  });
+});

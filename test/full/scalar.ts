@@ -1,140 +1,140 @@
-import { suite, test, only } from 'mocha-typescript';
+import { describe, it } from 'mocha';
 import { testPackUnpack } from './util';
 
-@suite class ScalarSpec {
-  @test null() {
+describe('scalar', function() {
+  it('null', function() {
     testPackUnpack(null);
-  }
+  });
 
-  @test undefined() {
+  it('undefined', function() {
     testPackUnpack(undefined);
-  }
+  });
 
-  @test booleanTrue() {
+  it('booleanTrue', function() {
     testPackUnpack(true);
-  }
+  });
 
-  @test booleanFalse() {
+  it('booleanFalse', function() {
     testPackUnpack(false);
-  }
+  });
 
-  @test booleanBoxedTrue() {
+  it('booleanBoxedTrue', function() {
     testPackUnpack(Boolean(true));
-  }
+  });
 
-  @test booleanBoxedFalse() {
+  it('booleanBoxedFalse', function() {
     testPackUnpack(Boolean(false));
-  }
+  });
 
-  @test integerPositiveSmall() {
+  it('integerPositiveSmall', function() {
     for(let i = 0; i < 10; i++) {
       testPackUnpack(i);
     }
-  }
+  });
 
-  @test integerNegativeSmall() {
+  it('integerNegativeSmall', function() {
     for(let i = -1; i > -10; i--) {
       testPackUnpack(i);
     }
-  }
+  });
 
-  @test integerBoxedPositiveSmall() {
+  it('integerBoxedPositiveSmall', function() {
     for(let i = 0; i < 10; i++) {
       testPackUnpack(Number(i));
     }
-  }
+  });
 
-  @test integerBoxedNegativeSmall() {
+  it('integerBoxedNegativeSmall', function() {
     for(let i = -1; i > -10; i--) {
       testPackUnpack(Number(i));
     }
-  }
+  });
 
-  @test integerPositiveBig() {
+  it('integerPositiveBig', function() {
     testPackUnpack(12301230);
-  }
+  });
 
-  @test integerNegativeBig() {
+  it('integerNegativeBig', function() {
     testPackUnpack(-12301230);
-  }
+  });
 
-  @test integerBoxedPositiveBig() {
+  it('integerBoxedPositiveBig', function() {
     testPackUnpack(Number(12301230));
-  }
+  });
 
-  @test integerBoxedNegativeBig() {
+  it('integerBoxedNegativeBig', function() {
     testPackUnpack(Number(-12301230));
-  }
+  });
 
-  @test floatPositiveSmall() {
+  it('floatPositiveSmall', function() {
     testPackUnpack(5.999, 2, true);
-  }
+  });
 
-  @test floatNegativeSmall() {
+  it('floatNegativeSmall', function() {
     testPackUnpack(-15.55, 2, true);
-  }
+  });
 
-  @test floatBoxedPositiveSmall() {
+  it('floatBoxedPositiveSmall', function() {
     testPackUnpack(Number(5.999), 2, true);
-  }
+  });
 
-  @test floatBoxedNegativeSmall() {
+  it('floatBoxedNegativeSmall', function() {
     testPackUnpack(Number(-15.55), 2, true);
-  }
+  });
 
-  @test floatFullPrecisionPositive() {
+  it('floatFullPrecisionPositive', function() {
     testPackUnpack(5.9234827938, 2, false, { fullPrecisionFloats: true });
-  }
+  });
 
-  @test floatFullPrecisionNegative() {
+  it('floatFullPrecisionNegative', function() {
     testPackUnpack(-15.552345411, 2, false, { fullPrecisionFloats: true });
-  }
+  });
 
-  @test stringShort() {
+  it('stringShort', function() {
     testPackUnpack('a');
-  }
+  });
 
-  @test stringBoxedShort() {
+  it('stringBoxedShort', function() {
     testPackUnpack(String('a'));
-  }
+  });
 
-  @test stringShortSingleQuote() {
+  it('stringShortSingleQuote', function() {
     testPackUnpack("'", 1);
-  }
+  });
 
-  @test stringShortDoubleQuote() {
+  it('stringShortDoubleQuote', function() {
     testPackUnpack('"');
-  }
+  });
 
-  @test stringLong() {
+  it('stringLong', function() {
     testPackUnpack('aoasdfjalisruhgalsiuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc');
-  }
+  });
 
-  @test stringBoxedLong() {
+  it('stringBoxedLong', function() {
     testPackUnpack(String('aoasdfjalisruhgalsiuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc'));
-  }
+  });
 
-  @test stringLongSingleQuotes() {
+  it('stringLongSingleQuotes', function() {
     testPackUnpack('\'aoasdfjalisruhgals\'iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc\'');
-  }
+  });
 
-  @test stringLongDoubleQuotes() {
+  it('stringLongDoubleQuotes', function() {
     testPackUnpack('"aoasdfjalisruhgals"iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc"');
-  }
+  });
 
-  @test stringDate() {
+  it('stringDate', function() {
     testPackUnpack('2018-01-01T00:00:00Z');
-  }
+  });
 
-  @test stringDateWithDetection() {
+  it('stringDateWithDetection', function() {
     testPackUnpack('2018-01-01T00:00:00.000Z', 0, false, { detectUtcTimestamps: true });
-  }
+  });
 
-  @test stringNoneDateWithDetection() {
+  it('stringNoneDateWithDetection', function() {
     testPackUnpack('aosdjaoisdjai', 0, false, { detectUtcTimestamps: true });
-  }
+  });
 
-  @test date() {
+  it('date', function() {
     testPackUnpack(new Date());
-  }
-}
+  });
+});

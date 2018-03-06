@@ -1,20 +1,21 @@
-import { suite, test, only } from 'mocha-typescript';
+import { describe, it } from 'mocha';
 import { testPackUnpack } from './util';
 
-@suite class ObjectSpec {
-  @test empty() {
+
+describe('object', function() {
+  it('empty', function() {
     testPackUnpack({});
-  }
+  });
 
-  @test homogenous() {
+  it('homogenous', function() {
     testPackUnpack({ x: 1, y: 2, z: 3 });
-  }
+  });
 
-  @test mixed() {
+  it('mixed', function() {
     testPackUnpack({ x: 1, y: 212301230, z: 'asdfioj{{', 'i': '', 'longkey': true, 'nope': undefined });
-  }
+  });
 
-  @test nested() {
+  it('nested', function() {
     testPackUnpack({
       x: 1, y: 212301230,
       z: 'asdfioj{{', 'i': '',
@@ -47,5 +48,5 @@ import { testPackUnpack } from './util';
         }
       ]
     }, 0, true);
-  }
-}
+  });
+});

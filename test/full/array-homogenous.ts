@@ -1,4 +1,4 @@
-import { suite, test, only } from 'mocha-typescript';
+import { describe, it } from 'mocha';
 import { testPackUnpack } from './util';
 
 const ONE = 1;
@@ -11,154 +11,154 @@ function testPackUnpackHomogeneousArray(element: any, count: number, expectedCom
   testPackUnpack(arr, expectedCompressionOffset, roughly);
 }
 
-@suite class ArrayHomogenousSpec {
-  @test empty() {
+describe('array-homogenous', function() {
+  it('empty', function() {
     testPackUnpack([]);
-  }
+  });
 
-  @test nullOne() {
+  it('nullOne', function() {
     testPackUnpackHomogeneousArray(null, ONE);
-  }
+  });
 
-  @test nullMany() {
+  it('nullMany', function() {
     testPackUnpackHomogeneousArray(null, MANY);
-  }
+  });
 
-  @test undefinedOne() {
+  it('undefinedOne', function() {
     testPackUnpackHomogeneousArray(undefined, ONE);
-  }
+  });
 
-  @test undefinedMany() {
+  it('undefinedMany', function() {
     testPackUnpackHomogeneousArray(undefined, MANY);
-  }
+  });
 
-  @test booleanTrueOne() {
+  it('booleanTrueOne', function() {
     testPackUnpackHomogeneousArray(true, ONE);
-  }
+  });
 
-  @test booleanTrueMany() {
+  it('booleanTrueMany', function() {
     testPackUnpackHomogeneousArray(true, MANY);
-  }
+  });
 
-  @test booleanFalseOne() {
+  it('booleanFalseOne', function() {
     testPackUnpackHomogeneousArray(false, ONE);
-  }
+  });
 
-  @test booleanFalseMany() {
+  it('booleanFalseMany', function() {
     testPackUnpackHomogeneousArray(false, MANY);
-  }
+  });
 
-  @test integerPositiveSmallOne() {
+  it('integerPositiveSmallOne', function() {
     for(let i = 0; i < 10; i++) {
       testPackUnpackHomogeneousArray(i, ONE);
     }
-  }
+  });
 
-  @test integerPositiveSmallMany() {
+  it('integerPositiveSmallMany', function() {
     for(let i = 0; i < 10; i++) {
       testPackUnpackHomogeneousArray(i, MANY);
     }
-  }
+  });
 
-  @test integerNegativeSmallOne() {
+  it('integerNegativeSmallOne', function() {
     for(let i = -1; i > -10; i--) {
       testPackUnpackHomogeneousArray(i, ONE);
     }
-  }
+  });
 
-  @test integerNegativeSmallMany() {
+  it('integerNegativeSmallMany', function() {
     for(let i = -1; i > -10; i--) {
       testPackUnpackHomogeneousArray(i, MANY);
     }
-  }
+  });
 
-  @test integerPositiveBigOne() {
+  it('integerPositiveBigOne', function() {
     testPackUnpackHomogeneousArray(12301230, ONE);
-  }
+  });
 
-  @test integerPositiveBigMany() {
+  it('integerPositiveBigMany', function() {
     testPackUnpackHomogeneousArray(12301230, MANY);
-  }
+  });
 
-  @test integerNegativeBigOne() {
+  it('integerNegativeBigOne', function() {
     testPackUnpackHomogeneousArray(-12301230, ONE);
-  }
+  });
 
-  @test integerNegativeBigMany() {
+  it('integerNegativeBigMany', function() {
     testPackUnpackHomogeneousArray(-12301230, MANY);
-  }
+  });
 
-  @test floatPositiveSmallOne() {
+  it('floatPositiveSmallOne', function() {
     testPackUnpackHomogeneousArray(15.555, ONE, 2, true);
-  }
+  });
 
-  @test floatNegativeSmallOne() {
+  it('floatNegativeSmallOne', function() {
     testPackUnpackHomogeneousArray(-15.55, ONE, 2, true);
-  }
+  });
 
-  @test stringShortOne() {
+  it('stringShortOne', function() {
     testPackUnpackHomogeneousArray('a', ONE);
-  }
+  });
 
-  @test stringShortMany() {
+  it('stringShortMany', function() {
     testPackUnpackHomogeneousArray('a', MANY);
-  }
+  });
 
-  @test stringShortSingleQuoteOne() {
-    // Single quotes in very short strings must be escape thus would add one to baseline compressed size
+  it('stringShortSingleQuoteOne', function() {
+    // ,Single quotes in very short strings must be escape thus would add one to baseline compressed size
     testPackUnpackHomogeneousArray("'", ONE, 1);
-  }
+  });
 
-  @test stringShortSingleQuoteMany() {
-    // Single quotes in very short strings must be escape thus would add one to baseline compressed size
+  it('stringShortSingleQuoteMany', function() {
+    // ,Single quotes in very short strings must be escape thus would add one to baseline compressed size
     testPackUnpackHomogeneousArray("'", MANY, 1);
-  }
+  });
 
-  @test stringShortDoubleQuoteOne() {
+  it('stringShortDoubleQuoteOne', function() {
     testPackUnpackHomogeneousArray('"', ONE);
-  }
+  });
 
-  @test stringShortDoubleQuoteMany() {
+  it('stringShortDoubleQuoteMany', function() {
     testPackUnpackHomogeneousArray('"', MANY);
-  }
+  });
 
-  @test stringLongOne() {
+  it('stringLongOne', function() {
     testPackUnpackHomogeneousArray('aoasdfjalisruhgalsiuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc', ONE);
-  }
+  });
 
-  @test stringLongMany() {
+  it('stringLongMany', function() {
     testPackUnpackHomogeneousArray('aoasdfjalisruhgalsiuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc', MANY);
-  }
+  });
 
-  @test stringLongSingleQuotesOne() {
+  it('stringLongSingleQuotesOne', function() {
     testPackUnpackHomogeneousArray('\'aoasdfjalisruhgals\'iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc\'', ONE);
-  }
+  });
 
-  @test stringLongSingleQuotesMany() {
+  it('stringLongSingleQuotesMany', function() {
     testPackUnpackHomogeneousArray('\'aoasdfjalisruhgals\'iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc\'', MANY);
-  }
+  });
 
-  @test stringLongDoubleQuotesOne() {
+  it('stringLongDoubleQuotesOne', function() {
     testPackUnpackHomogeneousArray('"aoasdfjalisruhgals"iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc"', ONE);
-  }
+  });
 
-  @test stringLongDoubleQuotesMany() {
+  it('stringLongDoubleQuotesMany', function() {
     testPackUnpackHomogeneousArray('"aoasdfjalisruhgals"iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc"', MANY);
-  }
+  });
 
-  @test objectOne() {
+  it('objectOne', function() {
     testPackUnpackHomogeneousArray({ x: 123 }, ONE);
-  }
+  });
 
-  @test objectMany() {
+  it('objectMany', function() {
     testPackUnpackHomogeneousArray({ x: 123 }, MANY);
-  }
+  });
 
-  @test objectNestedOne() {
+  it('objectNestedOne', function() {
     testPackUnpackHomogeneousArray({ x: 123, y: { z: 'asd{f]s' }, z: [234, '{]324asd' ] }, ONE);
-  }
+  });
 
-  @test objectNestedMany() {
+  it('objectNestedMany', function() {
     testPackUnpackHomogeneousArray({ x: 123, y: { z: 'asd{f]s' }, z: [234, '{]324asd' ] }, MANY);
-  }
-}
+  });
+});

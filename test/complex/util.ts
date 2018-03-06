@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
 import { stringify, parse, parseIncremental } from '../../src';
 
 export class TestCase {

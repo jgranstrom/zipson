@@ -1,4 +1,4 @@
-import { suite, test, only } from 'mocha-typescript';
+import { describe, it } from 'mocha';
 import { testPackUnpack } from './util';
 import * as dummyjson from 'dummy-json';
 
@@ -41,14 +41,14 @@ function getData() {
   }`);
 };
 
-@suite class Chaos {
-  @test roughly() {
+describe('chaos', function() {
+  it('roughly', function() {
     const data = JSON.parse(getData());
     testPackUnpack(data, 0, true);
-  }
+  });
 
-  @test fullPrecision() {
+  it('fullPrecision', function() {
     const data = JSON.parse(getData());
     testPackUnpack(data, 0, false, { fullPrecisionFloats: true });
-  }
-}
+  });
+});
