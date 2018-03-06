@@ -31,7 +31,7 @@ export function decompressStages(cursor: Cursor, data: string, orderedIndex: Ord
         // Add any found tokens prior to next nested as separate paths
         for(let i = 0; i < cursor.currentTarget.currentTokens.length - 1; i++) {
           const currentToken = cursor.currentTarget.currentTokens[i];
-          cursor.currentTarget.paths.push([...cursor.currentTarget.currentRoute, currentToken]);
+          cursor.currentTarget.paths[cursor.currentTarget.paths.length] = cursor.currentTarget.currentRoute.concat(currentToken);
         }
         // Add most recent token as part of next path
         if(cursor.currentTarget.currentToken != null) {
@@ -44,7 +44,7 @@ export function decompressStages(cursor: Cursor, data: string, orderedIndex: Ord
     } else if(c === TEMPLATE_OBJECT_END && cursor.currentTarget.type === TargetType.TEMPLATE_OBJECT) {
       for(let i = 0; i < cursor.currentTarget.currentTokens.length; i++) {
         const currentToken = cursor.currentTarget.currentTokens[i];
-        cursor.currentTarget.paths.push([...cursor.currentTarget.currentRoute, currentToken]);
+        cursor.currentTarget.paths[cursor.currentTarget.paths.length] = cursor.currentTarget.currentRoute.concat(currentToken);
       }
       cursor.currentTarget.currentTokens = [];
       cursor.currentTarget.currentRoute = cursor.currentTarget.currentRoute.slice(0, -1);
