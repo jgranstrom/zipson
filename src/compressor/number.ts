@@ -1,4 +1,4 @@
-import { INTEGER_SMALL_POS_TOKEN, INTEGER_SMALL_NEG_TOKEN, REF_INTEGER_TOKEN, INTEGER_TOKEN, REFERENCE_HEADER_LENGTH, UNREFERENCED_INTEGER_TOKEN, REF_FLOAT_TOKEN, FLOAT_TOKEN, UNREFERENCED_FLOAT_TOKEN, INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER, INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER } from "../constants";
+import { REF_INTEGER_TOKEN, INTEGER_TOKEN, REFERENCE_HEADER_LENGTH, UNREFERENCED_INTEGER_TOKEN, REF_FLOAT_TOKEN, FLOAT_TOKEN, UNREFERENCED_FLOAT_TOKEN, INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER, INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER, INTEGER_SMALL_TOKENS, INTEGER_SMALL_TOKEN_ELEMENT_OFFSET } from "../constants";
 import { Context, InvertedIndex, CompressOptions, Compressors } from "./common";
 import { ZipsonWriter } from "./writer";
 import { compressInteger, compressFloat } from "../util";
@@ -19,11 +19,7 @@ export function compressNumber(
   if(obj % 1 === 0) {
     // CHeck if the value is a small integer
     if(obj < INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER && obj > INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER) {
-      if(obj >= 0) {
-        writer.write(`${INTEGER_SMALL_POS_TOKEN[obj]}`);
-      } else {
-        writer.write(`${INTEGER_SMALL_NEG_TOKEN[-obj - 1]}`);
-      }
+      writer.write(INTEGER_SMALL_TOKENS[obj + INTEGER_SMALL_TOKEN_ELEMENT_OFFSET]);
     } else if((foundRef = invertedIndex.integerMap[obj]) !== void 0) {
       writer.write(`${REF_INTEGER_TOKEN}${foundRef}`)
     } else {

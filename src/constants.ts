@@ -21,15 +21,15 @@ export const LP_DATE_TOKEN = '±';
 export const UNREFERENCED_INTEGER_TOKEN  = '¤';
 export const UNREFERENCED_FLOAT_TOKEN = '¥';
 export const UNREFERENCED_STRING_TOKEN = '´';
-export const UNREFERENCED_DATE_TOKEN = 'æ';
+export const UNREFERENCED_DATE_TOKEN = '¿';
 export const UNREFERENCED_LP_DATE_TOKEN = 'ÿ';
-export const REF_INTEGER_TOKEN = 'ç';
+export const REF_INTEGER_TOKEN = 'º';
 export const REF_FLOAT_TOKEN = 'Ý';
 export const REF_STRING_TOKEN = 'ß';
 export const REF_DATE_TOKEN = '×';
 export const REF_LP_DATE_TOKEN = 'ü';
-export const NULL_TOKEN = '§'
-export const UNDEFINED_TOKEN = 'µ'
+export const NULL_TOKEN = '§';
+export const UNDEFINED_TOKEN = 'µ';
 export const BOOLEAN_TRUE_TOKEN = '»';
 export const BOOLEAN_FALSE_TOKEN = '«';
 
@@ -74,12 +74,8 @@ export const DELIMITING_TOKENS_THRESHOLD = 122;
  */
 export const INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER = -10;
 export const INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER = 10;
-export const INTEGER_SMALL_POS_TOKEN = ['ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ'];
-export const INTEGER_SMALL_NEG_TOKEN = ['¹', '²', '³', '¼', '¿', '¸', '¶', '¬', '°'];
-export const INTEGER_SMALL_TOKENS = new Map<string, number>();
-INTEGER_SMALL_POS_TOKEN.forEach((token, idx) => {
-  INTEGER_SMALL_TOKENS.set(token, idx);
-});
-INTEGER_SMALL_NEG_TOKEN.forEach((token, idx) => {
-  INTEGER_SMALL_TOKENS.set(token, -idx - 1);
-});
+export const INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_LOWER = 191;
+export const INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_UPPER = 211;
+export const INTEGER_SMALL_TOKEN_OFFSET = -201;
+export const INTEGER_SMALL_TOKEN_ELEMENT_OFFSET = 9;
+export const INTEGER_SMALL_TOKENS = ['À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò'];

@@ -1,9 +1,11 @@
 import { STRING_TOKEN, UNREFERENCED_STRING_TOKEN, ESCAPE_CHARACTER, DELIMITING_TOKENS_THRESHOLD,
-  ARRAY_REPEAT_MANY_TOKEN, INTEGER_SMALL_TOKENS, REF_STRING_TOKEN, REF_INTEGER_TOKEN, REF_FLOAT_TOKEN,
+  ARRAY_REPEAT_MANY_TOKEN, REF_STRING_TOKEN, REF_INTEGER_TOKEN, REF_FLOAT_TOKEN,
   REF_DATE_TOKEN, REF_LP_DATE_TOKEN, INTEGER_TOKEN, FLOAT_TOKEN, DATE_TOKEN, LP_DATE_TOKEN,
   UNREFERENCED_INTEGER_TOKEN, REGEX_UNREFERENCED_ESCAPED_STRING_TOKEN, DATE_LOW_PRECISION,
   UNREFERENCED_FLOAT_TOKEN, UNREFERENCED_DATE_TOKEN, UNREFERENCED_LP_DATE_TOKEN, BOOLEAN_TRUE_TOKEN,
-  BOOLEAN_FALSE_TOKEN, NULL_TOKEN, UNDEFINED_TOKEN, REGEX_ESCAPED_STRING_TOKEN } from "../constants";
+  BOOLEAN_FALSE_TOKEN, NULL_TOKEN, UNDEFINED_TOKEN, REGEX_ESCAPED_STRING_TOKEN,
+  INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_LOWER, INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_UPPER, INTEGER_SMALL_TOKEN_OFFSET
+} from "../constants";
 
 import { SKIP_SCALAR, OrderedIndex, Cursor, Scalar, SkipScalar } from "./common";
 import { decompressInteger, decompressFloat } from "../util";
@@ -36,10 +38,11 @@ export function decompressScalar(token: string, data: string, cursor: Cursor, or
   // Update cursor end index
   cursor.index = endIndex - 1;
 
+  const tokenCharCode = token.charCodeAt(0);
+
   // Decompress the token value
-  let foundSmallInt;
-  if((foundSmallInt = INTEGER_SMALL_TOKENS.get(token)) != null) {
-    return foundSmallInt;
+  if(tokenCharCode > INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_LOWER && tokenCharCode < INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_UPPER) {
+    return tokenCharCode + INTEGER_SMALL_TOKEN_OFFSET;
   } else if(token === ARRAY_REPEAT_MANY_TOKEN) {
     return decompressInteger(data.substring(startIndex + 1, endIndex));
   } else if(token === REF_STRING_TOKEN) {
