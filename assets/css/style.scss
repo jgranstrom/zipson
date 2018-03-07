@@ -1,0 +1,185 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.main-content {
+  @include large {
+    max-width: 70rem;
+  }
+}
+
+.page-header {
+  @include large {
+    padding: 1rem 3rem;
+  }
+
+  @include medium {
+    padding: 1rem 2rem;
+  }
+
+  @include small {
+    padding: 1rem 1rem;
+  }
+}
+
+@keyframes indicate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.demo {
+  .demo-header {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .demo-header-element {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-shrink: 0;
+      margin-bottom: 1rem;
+      position: relative;
+      p { margin: 0; }
+
+      .demo-header-metric, .demo-header-label {
+        text-align: right;
+      }
+
+      .demo-header-label {
+        font-size: 0.6em;
+      }
+    }
+
+    .demo-header-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+
+    .demo-header-group .demo-header-element {
+      max-width: 6rem;
+      // align-items: flex-end;
+      justify-content: center;
+    }
+
+    #demo-indicate {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #f3f6fa;
+      z-index: 1;
+      opacity: 0;
+      &.active {
+        animation: indicate 1s normal forwards ease-in-out;
+      }
+    }
+    #demo-select {
+      &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+      }
+      /* styling */
+      z-index: 2;
+      background-color: transparent;
+      border: 1px solid #e8e8e8;
+      border-radius: 0;
+      display: inline-block;
+      font: inherit;
+      line-height: 1.5em;
+      padding: 0.5em 3.5em 0.5em 1em;
+
+      /* reset */
+
+      margin: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%);
+      background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 2.5em) 0.5em;
+      background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .demo-content {
+    display: flex;
+    width: 100%;
+    position: relative;
+
+    #demo-editor, #demo-output {
+      width: 50%;
+      height: 380px;
+    }
+
+    #demo-output {
+      overflow-y: scroll;
+      border-radius: 0;
+      font-size: 0.75rem;
+      word-break: break-all;
+      opacity: 1;
+      transition: opacity 0.1s ease;
+    }
+    #demo-output.invalid {
+      opacity: 0.5;
+    }
+
+    #demo-error {
+      position: absolute;
+      left: 75%;
+      top: 50%;
+      z-index: 3;
+      font-size: 0.8rem;
+      padding: 0.5em 1em;
+      background: #ffe6e6;
+      line-height: 1em;
+      border: 1px solid rgba(240, 126, 126, 0.17);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.1s ease;
+      &.active {
+        opacity: 1;
+      }
+    }
+
+    @include small {
+      #demo-error {
+        left: 50%;
+        top: 75%;
+      }
+
+      & {
+        flex-direction: column;
+
+        #demo-editor, #demo-output {
+          width: 100%;
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+.ace-github .ace_marker-layer .ace_active-line {
+  background: rgb(245, 245, 245) !important;
+}

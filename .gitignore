@@ -1,0 +1,6 @@
+Gemfile
+Gemfile.lock
+_site
+dist
+lib
+node_modules
