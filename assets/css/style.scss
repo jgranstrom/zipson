@@ -1,6 +1,10 @@
 ---
 ---
 
+$header-bg-color: #3A6073;
+$header-bg-color-secondary: #447994;
+$section-headings-color: #3A6073;
+
 @import "{{ site.theme }}";
 
 .main-content {
@@ -10,6 +14,13 @@
 }
 
 .page-header {
+  position: relative;
+  .project-icon {
+    width: 1em;
+    height: 1em;
+    margin-bottom: -0.1em;
+  }
+
   @include large {
     padding: 1rem 3rem;
   }
@@ -39,6 +50,7 @@
     flex-wrap: wrap;
 
     .demo-header-element {
+      max-width: 100%;
       display: flex;
       flex-direction: column;
       flex-grow: 1;

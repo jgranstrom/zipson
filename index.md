@@ -24,8 +24,9 @@ parse(stringify(data));
 
 - Efficient compression with a convenient API
 - Zero configuration drop-in replacement for `JSON.stringify` and `JSON.parse`
-- Detect and reuse recurring patterns in recursive structures
-- Automatically reduce floating point precision unless you need those fine `10^-xx` decimals
-- Optionally detect and heavily compress UTC timestamps in strings
-- Supports streams with the companion lib [zipson-stream](https://github.com/jgranstrom/zipson-stream)
-- Use it in the browser and on the server
+- Zero dependencies
+- Detection of recurring patterns in recursive structures
+- Automatic reduction of floating point precision unless you actually need those fine `10^-xx` decimals
+- Optional detection and compression of UTC timestamps in strings
+- Stream support with the companion lib [zipson-stream](https://github.com/jgranstrom/zipson-stream)
+- Support for browser and node

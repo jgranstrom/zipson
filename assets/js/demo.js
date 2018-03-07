@@ -265,6 +265,57 @@
     }
   }
 ]`
+    },
+    {
+      title: 'Some kind of game state',
+      data: `{
+  "directions": {
+    "left": {
+      "entities": {
+        "enemies": 3,
+        "friendlies": 0
+      },
+      "trace": {
+        "distance": 120,
+        "objects": 7,
+        "colliding": false
+      }
+    },
+    "right": {
+      "entities": {
+        "enemies": 0,
+        "friendlies": 0
+      },
+      "trace": {
+        "distance": 7,
+        "objects": 1,
+        "colliding": true
+      }
+    },
+    "forward": {
+      "entities": {
+        "enemies": 1,
+        "friendlies": 8
+      },
+      "trace": {
+        "distance": 138,
+        "objects": 10,
+        "colliding": false
+      }
+    },
+    "back": {
+      "entities": {
+        "enemies": 0,
+        "friendlies": 2
+      },
+      "trace": {
+        "distance": 75,
+        "objects": 3,
+        "colliding": false
+      }
+    }
+  }
+}`
     }
   ]
 
