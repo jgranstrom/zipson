@@ -1,3 +1,6 @@
+---
+---
+
 (function() {
   var editor = ace.edit("demo-editor");
   var output = document.getElementById('demo-output');
@@ -231,6 +234,30 @@
           "name": "Mark",
           "image": {
             "url": "mark.png",
+            "size": { "width": 100, "height": 80 }
+          }
+        }
+      }
+    }
+  },
+  {
+    "user": {
+      "id": 2,
+      "name": "Carol",
+      "image": {
+        "url": "carol.png",
+        "size": { "width": 100, "height": 80 }
+      }
+    },
+    "car": {
+      "color": "green",
+      "year": 2014,
+      "owner": {
+        "user": {
+          "id": 2,
+          "name": "Carol",
+          "image": {
+            "url": "carol.png",
             "size": { "width": 100, "height": 80 }
           }
         }

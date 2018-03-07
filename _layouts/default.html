@@ -9,7 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% if page.demo %}
-    <script src="https://cdn.jsdelivr.net/npm/zipson@latest/dist/zipson.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zipson@0.2.4/dist/zipson.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.1/ace.js" type="text/javascript" charset="utf-8"></script>
     {% endif %}
   </head>
@@ -45,7 +45,7 @@
             <div id="demo-error">Invalid JSON</div>
           </div>
         </div>
-        <script src="/assets/js/demo.js"></script>
+        <script src="{{ '/assets/js/demo.js?v=' | append: site.github.build_revision | relative_url }}"></script>
       {% endif %}
       {{ content }}
     </section>
