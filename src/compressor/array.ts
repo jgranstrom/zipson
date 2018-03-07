@@ -47,7 +47,7 @@ export function compressArray(
 
     // Determine if still templating after the two first elements
     if(i > 1 && templateObject.isTemplating) {
-      templateObject.isNextTemplateable(array[i], writer);
+      templateObject.isNextTemplateable(array[i], parentWriter);
     }
 
     if(templateObject.isTemplating) {
