@@ -73,8 +73,8 @@ export class TemplateObject implements TemplateCompressor<any> {
  * or false if not and a shared template structure could not be built
  */
 function buildTemplate(a: any, b: any, struct: TemplateStruct, level = 0): boolean {
-  // Do not check deeper than 3 levels
-  if(level > 3) { return false; }
+  // Do not check deeper than 6 levels
+  if(level > 6) { return false; }
 
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
