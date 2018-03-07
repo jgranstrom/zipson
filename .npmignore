@@ -2,3 +2,6 @@ src
 test
 .vscode
 tsconfig.json
+_site
+Gemfile
+Gemfile.lock
