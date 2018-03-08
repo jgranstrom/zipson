@@ -62,6 +62,9 @@ $section-headings-color: #3A6073;
       .demo-header-metric, .demo-header-label {
         text-align: right;
       }
+      .demo-header-label {
+        padding-right: 15px;
+      }
 
       .demo-header-label {
         font-size: 0.6em;
@@ -77,7 +80,7 @@ $section-headings-color: #3A6073;
     }
 
     .demo-header-group .demo-header-element {
-      max-width: 6rem;
+      max-width: 7rem;
       // align-items: flex-end;
       justify-content: center;
     }
@@ -194,4 +197,88 @@ $section-headings-color: #3A6073;
 
 .ace-github .ace_marker-layer .ace_active-line {
   background: rgb(245, 245, 245) !important;
+}
+
+.demo-header-element[data-tooltip] {
+  position: relative;
+  cursor: default;
+
+  &:hover, &:active, &:focus {
+    &:after, &:before {
+      transition: opacity 0.2s ease;
+      opacity: 1;
+    }
+
+    .help-tip {
+      background-color: rgba(68, 121, 148, 1);
+    }
+  }
+
+  &:before {
+    position: absolute;
+    top: 100%;
+    right: 25%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #3a5f73;
+    border-width: 0.5rem;
+    margin-left: 0.5rem;
+    margin-top: -0.5rem;
+    z-index: 10000;
+    opacity: 0;
+    transition: none;
+  }
+  &:after {
+    white-space: pre-line;
+    pointer-events: none;
+    font-size: 0.8rem;
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 300%;
+    max-width: 15rem;
+    z-index: 9999;
+    opacity: 0;
+    transition: none;
+    color: white;
+    border-radius: 5px;
+    background: #3A6073;
+    box-shadow: 2px 2px 8px 0px #00000059;
+    padding: 0.5rem;
+
+    @include small {
+      max-width: 13rem;
+    }
+  }
+
+
+}
+
+.help-tip{
+  position: absolute;
+  top: 4px;
+  right: -2px;
+  text-align: center;
+  background-color: rgba(68, 121, 148, 0.5);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-size: 8px;
+  line-height: 12px;
+  cursor: default;
+  font-style: normal;
+  transition: background-color 0.2s ease;
+}
+
+.help-tip:before{
+  content:'?';
+  font-weight: bold;
+  color:#fff;
 }
