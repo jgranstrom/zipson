@@ -390,7 +390,13 @@
   tooltips.forEach(tooltip => {
     tooltip.addEventListener('touchstart', function(event) {
       event.stopPropagation();
-      if(activeTooltip) { activeTooltip.classList.remove('active'); }
+      if(activeTooltip === tooltip) {
+        activeTooltip.classList.remove('active');
+        activeTooltip = null;
+        return;
+      } else if(activeTooltip) {
+        activeTooltip.classList.remove('active');
+      }
       tooltip.classList.add('active');
       activeTooltip = tooltip;
     });
