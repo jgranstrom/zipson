@@ -422,9 +422,30 @@
       event.stopPropagation();
       tooltipHide(tooltip);
     })
+
+    var touching = false;
+    var touchedAt;
+    tooltip.addEventListener('touchstart', function(event) {
+      event.stopPropagation();
+      if(tooltip !== activeTooltip) {
+        tooltipHideAll();
+      }
+      touching = true;
+      touchedAt = new Date();
+    });
+    tooltip.addEventListener('touchcancel', function(event) {
+      event.stopPropagation();
+      touching = false;
+      tooltipHideAll();
+    });
     tooltip.addEventListener('touchend', function(event) {
       event.stopPropagation();
-      tooltipShow(tooltip);
+      if(touching && (new Date() - touchedAt) < 200) {
+        tooltipShow(tooltip);
+      } else {
+        tooltipHideAll();
+      }
+      touching = false;
     });
   });
 
