@@ -413,26 +413,30 @@
     }
   }
 
+  var hideAllTimer;
   tooltips.forEach(tooltip => {
-    var ignoreClicks = false;
-    tooltip.addEventListener('mouseenter', function(event) {
-      ignoreClicks = true;
-      event.stopPropagation();
-      tooltipShow(tooltip);
-    });
-    tooltip.addEventListener('mouseleave', function(event) {
-      event.stopPropagation();
-      tooltipHide(tooltip);
-    });
-    tooltip.addEventListener('click', function(event) {
-      if(!ignoreClicks) {
+    if('ontouchstart' in window) {
+      tooltip.addEventListener('click', function(event) {
+        clearTimeout(hideAllTimer);
+        tooltipShow(tooltip);
+      });
+      tooltip.addEventListener('touchstart', function(event) {
+        event.stopPropagation();
+        clearTimeout(hideAllTimer);
+        hideAllTimer = setTimeout(() => {
+          tooltipHideAll();
+        }, 1000);
+      });
+    } else {
+      tooltip.addEventListener('mouseenter', function(event) {
         event.stopPropagation();
         tooltipShow(tooltip);
-      }
-    });
-    tooltip.addEventListener('touchstart', function(event) {
-      event.stopPropagation();
-    });
+      });
+      tooltip.addEventListener('mouseleave', function(event) {
+        event.stopPropagation();
+        tooltipHide(tooltip);
+      });
+    }
   });
 
   document.addEventListener('touchstart', tooltipHideAll);
