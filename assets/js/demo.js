@@ -384,5 +384,24 @@
     showExample(select.value);
   }
 
+  var tooltips = document.querySelectorAll('[data-tooltip]');
+  var activeTooltip = null;
+
+  tooltips.forEach(tooltip => {
+    tooltip.addEventListener('touchstart', function(event) {
+      event.stopPropagation();
+      if(activeTooltip) { activeTooltip.classList.remove('active'); }
+      tooltip.classList.add('active');
+      activeTooltip = tooltip;
+    });
+  });
+
+  document.addEventListener('touchstart', function() {
+    if(activeTooltip) {
+      activeTooltip.classList.remove('active');
+      activeTooltip = null;
+    }
+  })
+
   showExample(exampleIndex++);
 })();
