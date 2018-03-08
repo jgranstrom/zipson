@@ -387,27 +387,48 @@
   var tooltips = document.querySelectorAll('[data-tooltip]');
   var activeTooltip = null;
 
-  tooltips.forEach(tooltip => {
-    tooltip.addEventListener('touchstart', function(event) {
-      event.stopPropagation();
-      if(activeTooltip === tooltip) {
-        activeTooltip.classList.remove('active');
-        activeTooltip = null;
-        return;
-      } else if(activeTooltip) {
-        activeTooltip.classList.remove('active');
-      }
-      tooltip.classList.add('active');
-      activeTooltip = tooltip;
-    });
-  });
+  function tooltipShow(tooltip) {
+    if(activeTooltip === tooltip) {
+      activeTooltip.classList.remove('active');
+      activeTooltip = null;
+      return;
+    } else if(activeTooltip) {
+      activeTooltip.classList.remove('active');
+    }
+    tooltip.classList.add('active');
+    activeTooltip = tooltip;
+  }
 
-  document.addEventListener('touchstart', function() {
+  function tooltipHide(tooltip) {
+    if(activeTooltip === tooltip) {
+      activeTooltip.classList.remove('active');
+      activeTooltip = null;
+    }
+  }
+
+  function tooltipHideAll() {
     if(activeTooltip) {
       activeTooltip.classList.remove('active');
       activeTooltip = null;
     }
-  })
+  }
+
+  tooltips.forEach(tooltip => {
+    tooltip.addEventListener('mouseenter', function(event) {
+      event.stopPropagation();
+      tooltipShow(tooltip);
+    })
+    tooltip.addEventListener('mouseleave', function(event) {
+      event.stopPropagation();
+      tooltipHide(tooltip);
+    })
+    tooltip.addEventListener('touchstart', function(event) {
+      event.stopPropagation();
+      tooltipShow(tooltip);
+    });
+  });
+
+  document.addEventListener('touchstart', tooltipHideAll);
 
   showExample(exampleIndex++);
 })();

@@ -213,7 +213,7 @@ $section-headings-color: #3A6073;
   position: relative;
   cursor: default;
 
-  &:hover, &.active {
+  &.active {
     &:after, &:before {
       transition: opacity 0.2s ease;
       opacity: 1;
