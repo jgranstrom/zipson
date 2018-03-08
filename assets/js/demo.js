@@ -114,7 +114,7 @@
 }`
     },
     {
-      title: 'Some complex repeated data for some reason',
+      title: 'Some nested repeated data',
       data: `[
   { "x": [ { "y": [100, "hello", { "z": 5432 }]}]},
   { "x": [ { "y": [100, "hello", { "z": 5432 }]}]},
