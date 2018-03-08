@@ -422,7 +422,7 @@
       event.stopPropagation();
       tooltipHide(tooltip);
     })
-    tooltip.addEventListener('touchstart', function(event) {
+    tooltip.addEventListener('touchend', function(event) {
       event.stopPropagation();
       tooltipShow(tooltip);
     });
