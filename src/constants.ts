@@ -68,6 +68,7 @@ export const ARRAY_REPEAT_COUNT_THRESHOLD = 4;
  */
 export const REFERENCE_HEADER_LENGTH = 1;
 export const DELIMITING_TOKENS_THRESHOLD = 122;
+export const STRING_IDENT_PREFIX = '$';
 
 /**
  * Small integer tokens
