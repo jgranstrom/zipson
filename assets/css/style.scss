@@ -59,6 +59,20 @@ $section-headings-color: #3A6073;
       position: relative;
       p { margin: 0; }
 
+      @include small {
+        &.demo-select-element {
+          min-width: 100%;
+          width: 100%;
+        }
+      }
+
+      @include large {
+        &.demo-select-element {
+          max-width: 50%;
+          width: 100%;
+        }
+      }
+
       .demo-header-metric, .demo-header-label {
         text-align: right;
       }
@@ -103,7 +117,6 @@ $section-headings-color: #3A6073;
         color: transparent;
         text-shadow: 0 0 0 #000;
       }
-      /* styling */
       z-index: 2;
       background-color: transparent;
       border: 1px solid #e8e8e8;
@@ -111,10 +124,7 @@ $section-headings-color: #3A6073;
       display: inline-block;
       font: inherit;
       line-height: 1.5em;
-      padding: 0.5em 3.5em 0.5em 1em;
-
-      /* reset */
-
+      padding: 0.5em 2em 0.5em 1em;
       margin: 0;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
@@ -263,7 +273,8 @@ $section-headings-color: #3A6073;
 
 .help-tip{
   position: absolute;
-  top: 4px;
+  top: 3px;
+  vertical-align: middle;
   right: -2px;
   text-align: center;
   background-color: rgba(68, 121, 148, 0.5);
@@ -275,6 +286,10 @@ $section-headings-color: #3A6073;
   cursor: default;
   font-style: normal;
   transition: background-color 0.2s ease;
+
+  @include small {
+    top: 0;
+  }
 }
 
 .help-tip:before{
