@@ -1,4 +1,4 @@
-# zipson
+# <span><img src="https://cdn.rawgit.com/jgranstrom/zipson/master/docs/icon.svg" width="30" height="30">&nbsp;zipson</span>
 
 [![Build Status](https://travis-ci.org/jgranstrom/zipson.svg?branch=master&style=flat)](https://travis-ci.org/jgranstrom/zipson)
 [![npm version](https://badge.fury.io/js/zipson.svg)](http://badge.fury.io/js/zipson)
