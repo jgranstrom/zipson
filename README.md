@@ -6,7 +6,7 @@
 
 Zipson is a drop-in alternative to JSON.parse/stringify with added compression and streaming support.
 
-[![zipson.gif](https://s10.postimg.org/yxywevacp/zipson.gif)](https://postimg.org/image/jp8z13go5/)
+![demo](/docs/demo.gif?raw=true)
 
 Try the [online demo](https://jgranstrom.github.io/zipson/)
 
@@ -22,6 +22,7 @@ Try the [online demo](https://jgranstrom.github.io/zipson/)
   - [`detectUtcTimestamps`](#detectutctimestamps)
   - [`fullPrecisionFloats`](#fullprecisionfloats)
 - [Writer](#writer)
+- [Features](#features)
 - [Running the tests](#running-the-tests)
 - [Contributing](#contributing)
 - [Versioning](#versioning)
