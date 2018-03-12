@@ -54,10 +54,11 @@ export function decompressInteger(compressedInteger: string): number {
 export function compressFloat(float: number, fullPrecision: boolean = false): string {
   if(fullPrecision) {
     const [integer, fraction] = float.toString().split('.');
-    return `${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
+    const operator = integer === '-0' ? '-' : '';
+    return `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
   } else {
     const integer = float << 0;
-    const fraction = (FLOAT_COMPRESSION_PRECISION * (float % 1)) << 0;
+    const fraction = Math.round((FLOAT_COMPRESSION_PRECISION * (float % 1)));
     return `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
   }
 }
@@ -68,8 +69,9 @@ export function compressFloat(float: number, fullPrecision: boolean = false): st
 export function decompressFloat(compressedFloat: string): number {
   if(compressedFloat.indexOf(FLOAT_FULL_PRECISION_DELIMITER) > -1) {
     const [integer, fraction] = compressedFloat.split(FLOAT_FULL_PRECISION_DELIMITER);
+    const mult = integer === '-0' ? -1 : 1;
     const uncompressedInteger = decompressInteger(integer);
-    return parseFloat(uncompressedInteger + '.' + fraction);
+    return mult * parseFloat(uncompressedInteger + '.' + fraction);
   } else {
     const [integer, fraction] = compressedFloat.split(FLOAT_REDUCED_PRECISION_DELIMITER);
     const uncompressedInteger = decompressInteger(integer);
