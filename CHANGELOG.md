@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/jgranstrom/zipson/compare/v0.2.7...v0.2.8) (2018-06-18)
+
+
+### Bug Fixes
+
+* **decompressor:** use string enums to avoid mangle issues ([33f6f37](https://github.com/jgranstrom/zipson/commit/33f6f37))
+
+
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/jgranstrom/zipson/compare/v0.2.6...v0.2.7) (2018-03-12)
 
