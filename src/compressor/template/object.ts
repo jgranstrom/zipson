@@ -133,6 +133,7 @@ function buildTemplate(a: any, b: any, struct: TemplateStruct, level = 0): boole
  */
 function conformsToStructure(struct: TemplateStruct, obj: any) {
   if(!obj) { return false; }
+  if(Object.keys(obj).length !== struct.length) { return false; }
   for(let i = 0; i < struct.length; i++) {
     const key = struct[i][0];
     const isNested = struct[i].length > 1;
@@ -140,10 +141,6 @@ function conformsToStructure(struct: TemplateStruct, obj: any) {
     if(isNested) {
       const x = struct[i];
       const y = x[1];
-      if(x.length > 0) {
-        const y = x[1];
-
-      }
       if(!conformsToStructure(<TemplateStruct>struct[i][1], obj[key])) { return false; }
     } else {
       if(isObject(obj[key])) { return false; }
