@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/jgranstrom/zipson/compare/v0.2.8...v0.2.9) (2018-07-17)
+
+
+### Bug Fixes
+
+* **compressor:** fix template objects potentially dropping previously unseen fields ([8108fa2](https://github.com/jgranstrom/zipson/commit/8108fa2))
+
+
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/jgranstrom/zipson/compare/v0.2.7...v0.2.8) (2018-06-18)
 
