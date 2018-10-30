@@ -1,5 +1,9 @@
-import { FLOAT_COMPRESSION_PRECISION, FLOAT_FULL_PRECISION_DELIMITER, FLOAT_REDUCED_PRECISION_DELIMITER } from './constants';
+import {
+    FLOAT_COMPRESSION_PRECISION, FLOAT_FULL_PRECISION_DELIMITER, FLOAT_REDUCED_PRECISION_DELIMITER
+} from './constants';
 
+const maxInteger = 2147483648;
+const minInteger = -2147483649;
 const base62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
 /**
@@ -57,7 +61,7 @@ export function compressFloat(float: number, fullPrecision: boolean = false): st
     const operator = integer === '-0' ? '-' : '';
     return `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
   } else {
-    const integer = float << 0;
+    const integer = float >= maxInteger ? Math.floor(float) : float <= minInteger ? Math.ceil(float) : float << 0;
     const fraction = Math.round((FLOAT_COMPRESSION_PRECISION * (float % 1)));
     return `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
   }

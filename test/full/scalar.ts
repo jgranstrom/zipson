@@ -1,4 +1,5 @@
 import { describe, it } from 'mocha';
+
 import { testPackUnpack } from './util';
 
 describe('scalar', function() {
@@ -54,8 +55,16 @@ describe('scalar', function() {
     testPackUnpack(12301230);
   });
 
+  it('integerPositiveBigger', function() {
+    testPackUnpack(123012342310);
+  });
+
   it('integerNegativeBig', function() {
     testPackUnpack(-12301230);
+  });
+
+  it('integerNegativeBigger', function() {
+    testPackUnpack(-123014323230);
   });
 
   it('integerBoxedPositiveBig', function() {
@@ -88,6 +97,62 @@ describe('scalar', function() {
 
   it('floatFullPrecisionNegative', function() {
     testPackUnpack(-15.552345411, 2, false, { fullPrecisionFloats: true });
+  });
+
+  it('floatPositiveL1X', function() {
+    testPackUnpack(2147483646.23423, 2, true);
+  });
+
+  it('floatPositiveL1Y', function() {
+    testPackUnpack(2147483646.63423, 2, true);
+  });
+
+  it('floatPositiveL2X', function() {
+    testPackUnpack(2147483647.23423, 2, true);
+  });
+
+  it('floatPositiveL2Y', function() {
+    testPackUnpack(2147483647.73423, 2, true);
+  });
+
+  it('floatPositiveL3X', function() {
+    testPackUnpack(2147483648.23423, 2, true);
+  });
+
+  it('floatPositiveL3Y', function() {
+    testPackUnpack(2147483648.73423, 2, true);
+  });
+
+  it('floatNegativeL1X', function() {
+    testPackUnpack(-2147483646.23423, 2, true);
+  });
+
+  it('floatNegativeL1Y', function() {
+    testPackUnpack(-2147483646.63423, 2, true);
+  });
+
+  it('floatNegativeL2X', function() {
+    testPackUnpack(-2147483647.23423, 2, true);
+  });
+
+  it('floatNegativeL2Y', function() {
+    testPackUnpack(-2147483647.63423, 2, true);
+  });
+
+  it('floatNegativeL3X', function() {
+    testPackUnpack(-2147483648.23423, 2, true);
+  });
+
+  it('floatNegativeL3Y', function() {
+    testPackUnpack(-2147483648.63423, 2, true);
+  });
+
+  it('floatNegativeL4X', function() {
+    testPackUnpack(-2147483649.23423, 2, true);
+  });
+
+  it('floatNegativeL4Y', function() {
+    testPackUnpack(-2147483649.63423, 2, true);
   });
 
   it('stringShort', function() {

@@ -1,8 +1,8 @@
-import { stringify, parse } from '../../src';
-import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiRoughly from 'chai-roughly';
-import { CompressOptions } from '../../src';
+
+import { CompressOptions, parse, stringify } from '../../src';
+
 chai.use(chaiRoughly);
 
 export function testPackUnpack(original: any, expectedCompressionOffset = 0, roughly = false, options?: CompressOptions) {
@@ -11,11 +11,11 @@ export function testPackUnpack(original: any, expectedCompressionOffset = 0, rou
   const baseline = JSON.stringify(original);
   const expected = baseline !== undefined ? JSON.parse(baseline) : undefined;
   if(roughly) {
-    (<any>expect(unpacked, 'unpacked integrity').to).roughly(0.001).deep.equal(expected);
+    (<any>chai.expect(unpacked, 'unpacked integrity').to).roughly(0.001).deep.equal(expected);
   } else {
-    expect(unpacked, 'unpacked integrity').to.deep.equal(expected);
+    chai.expect(unpacked, 'unpacked integrity').to.deep.equal(expected);
   }
   if(original !== undefined) {
-    expect(packed.length, 'compressed size').to.be.lte(baseline.length + expectedCompressionOffset);
+    chai.expect(packed.length, 'compressed size').to.be.lte(baseline.length + expectedCompressionOffset);
   }
 }
