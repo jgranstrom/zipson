@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/jgranstrom/zipson/compare/v0.2.9...v0.2.10) (2018-10-30)
+
+
+### Bug Fixes
+
+* **compressor:** fix integer overflow for large floats with reduced precision ([c3412d6](https://github.com/jgranstrom/zipson/commit/c3412d6))
+
+
+
 <a name="0.2.9"></a>
 ## [0.2.9](https://github.com/jgranstrom/zipson/compare/v0.2.8...v0.2.9) (2018-07-17)
 
