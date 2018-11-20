@@ -1,7 +1,7 @@
-import { OrderedIndex, Cursor, TargetType, SKIP_SCALAR } from "./common";
-import { decompressScalar } from "./scalar";
-import { ARRAY_END_TOKEN, OBJECT_END_TOKEN } from "../constants";
-import { appendTemplateObjectPropertiesValue, appendTemplateObjectElementsValue } from './template';
+import { ARRAY_END_TOKEN, OBJECT_END_TOKEN } from '../constants';
+import { Cursor, OrderedIndex, SKIP_SCALAR, TargetType } from './common';
+import { decompressScalar } from './scalar';
+import { appendTemplateObjectElementsValue, appendTemplateObjectPropertiesValue } from './template';
 
 export function decompressElement(c: string, cursor: Cursor, data: string, orderedIndex: OrderedIndex): boolean {
   let targetValue: any;
@@ -20,7 +20,7 @@ export function decompressElement(c: string, cursor: Cursor, data: string, order
   } else if(cursor.currentTarget.type === TargetType.ARRAY) {
     cursor.currentTarget.value[cursor.currentTarget.value.length] = targetValue;
   } else if(cursor.currentTarget.type === TargetType.OBJECT) {
-    if(cursor.currentTarget.key) {
+    if(cursor.currentTarget.key != null) {
       cursor.currentTarget.value[cursor.currentTarget.key] = targetValue;
       cursor.currentTarget.key = void 0;
     } else {
