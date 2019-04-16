@@ -4,7 +4,8 @@ import { STRING_TOKEN, UNREFERENCED_STRING_TOKEN, ESCAPE_CHARACTER, DELIMITING_T
   UNREFERENCED_INTEGER_TOKEN, REGEX_UNREFERENCED_ESCAPED_STRING_TOKEN, DATE_LOW_PRECISION,
   UNREFERENCED_FLOAT_TOKEN, UNREFERENCED_DATE_TOKEN, UNREFERENCED_LP_DATE_TOKEN, BOOLEAN_TRUE_TOKEN,
   BOOLEAN_FALSE_TOKEN, NULL_TOKEN, UNDEFINED_TOKEN, REGEX_ESCAPED_STRING_TOKEN,
-  INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_LOWER, INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_UPPER, INTEGER_SMALL_TOKEN_OFFSET
+  INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_LOWER, INTEGER_SMALL_TOKEN_EXCLUSIVE_BOUND_UPPER, INTEGER_SMALL_TOKEN_OFFSET,
+  REGEX_ESCAPED_ESCAPE_CHARACTER
 } from "../constants";
 
 import { SKIP_SCALAR, OrderedIndex, Cursor, Scalar, SkipScalar } from "./common";
@@ -23,7 +24,12 @@ export function decompressScalar(token: string, data: string, cursor: Cursor, or
     let escaped = true;
     while(escaped && endIndex < data.length) {
       endIndex = data.indexOf(foundStringToken, endIndex);
-      escaped = data[endIndex - 1] === ESCAPE_CHARACTER;
+      let iNumEscapeCharacters = 1;
+      escaped = false;
+      while(data[endIndex - iNumEscapeCharacters] === ESCAPE_CHARACTER) {
+          escaped = iNumEscapeCharacters % 2 === 1;
+          iNumEscapeCharacters++;
+      }
       endIndex++;
     }
     if(endIndex <= startIndex) { endIndex = data.length; }
@@ -56,7 +62,7 @@ export function decompressScalar(token: string, data: string, cursor: Cursor, or
   } else if(token === REF_LP_DATE_TOKEN) {
     return orderedIndex.lpDates[decompressInteger(data.substring(startIndex + 1, endIndex))];
   } else if(token === STRING_TOKEN) {
-    return orderedIndex.strings[orderedIndex.strings.length] = data.substring(startIndex + 1, endIndex - 1).replace(REGEX_ESCAPED_STRING_TOKEN, STRING_TOKEN);
+    return orderedIndex.strings[orderedIndex.strings.length] = data.substring(startIndex + 1, endIndex - 1).replace(REGEX_ESCAPED_ESCAPE_CHARACTER, ESCAPE_CHARACTER).replace(REGEX_ESCAPED_STRING_TOKEN, STRING_TOKEN);
   } else if(token === INTEGER_TOKEN) {
     return orderedIndex.integers[orderedIndex.integers.length] = decompressInteger(data.substring(startIndex + 1, endIndex));
   } else if(token === FLOAT_TOKEN) {
@@ -66,7 +72,7 @@ export function decompressScalar(token: string, data: string, cursor: Cursor, or
   } else if(token === LP_DATE_TOKEN) {
     return orderedIndex.lpDates[orderedIndex.lpDates.length] = new Date(DATE_LOW_PRECISION * decompressInteger(data.substring(startIndex + 1, endIndex))).toISOString();
   } else if(token === UNREFERENCED_STRING_TOKEN) {
-    return data.substring(startIndex + 1, endIndex - 1).replace(REGEX_UNREFERENCED_ESCAPED_STRING_TOKEN, UNREFERENCED_STRING_TOKEN);
+    return data.substring(startIndex + 1, endIndex - 1).replace(REGEX_ESCAPED_ESCAPE_CHARACTER, ESCAPE_CHARACTER).replace(REGEX_UNREFERENCED_ESCAPED_STRING_TOKEN, UNREFERENCED_STRING_TOKEN);
   } else if(token === UNREFERENCED_INTEGER_TOKEN) {
     return decompressInteger(data.substring(startIndex + 1, endIndex));
   } else if(token === UNREFERENCED_FLOAT_TOKEN) {
