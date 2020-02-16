@@ -146,6 +146,18 @@ describe('array-homogenous', function() {
     testPackUnpackHomogeneousArray('"aoasdfjalisruhgals"iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc"', MANY);
   });
 
+  it('stringEscapeCharacterOne', function() {
+    testPackUnpackHomogeneousArray('aoasdfjalisruhgals\\iuhfdlsajdlifuashrlifuhsaildjfsalkhglasurflasjdfklsandfasurliausnlc', MANY);
+  });
+
+  it('stringEscapeCharacterMultiple', function() {
+    testPackUnpackHomogeneousArray('aoasdfjalisruhgals\\\\iuhfdlsajdlifuashrlifuhsaildjfsalkhglas\\urflasjdfklsandfasurliausnlc', MANY);
+  });
+
+  it('stringEscapeCharacterEnd', function() {
+    testPackUnpackHomogeneousArray('aoasdfjalisruhgals\\\\iuhfdlsajdlifuashrlifuhsaildjfsalkhglas\\urflasjdfklsandfasurliausnlc\\', MANY);
+  });
+
   it('objectOne', function() {
     testPackUnpackHomogeneousArray({ x: 123 }, ONE);
   });

@@ -43,6 +43,8 @@ export const ESCAPED_UNREFERENCED_STRING_TOKEN = `${ESCAPE_CHARACTER}${UNREFEREN
 /**
  * Regex lookups
  */
+export const REGEX_ESCAPE_CHARACTER = new RegExp(ESCAPE_CHARACTER.replace("\\", "\\\\"), 'g');
+export const REGEX_ESCAPED_ESCAPE_CHARACTER = new RegExp(ESCAPE_CHARACTER.replace("\\", "\\\\") + ESCAPE_CHARACTER.replace("\\", "\\\\"), 'g');
 export const REGEX_STRING_TOKEN = new RegExp(STRING_TOKEN, 'g');
 export const REGEX_ESCAPED_STRING_TOKEN = new RegExp(ESCAPE_CHARACTER + ESCAPED_STRING_TOKEN, 'g');
 export const REGEX_UNREFERENCED_STRING_TOKEN = new RegExp(UNREFERENCED_STRING_TOKEN, 'g');

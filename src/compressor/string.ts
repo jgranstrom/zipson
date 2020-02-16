@@ -1,4 +1,4 @@
-import { DATE_REGEX, REF_STRING_TOKEN, REGEX_STRING_TOKEN, ESCAPED_STRING_TOKEN, STRING_TOKEN, REFERENCE_HEADER_LENGTH, UNREFERENCED_STRING_TOKEN, REGEX_UNREFERENCED_STRING_TOKEN, ESCAPED_UNREFERENCED_STRING_TOKEN, STRING_IDENT_PREFIX } from "../constants";
+import { DATE_REGEX, REF_STRING_TOKEN, REGEX_STRING_TOKEN, ESCAPED_STRING_TOKEN, STRING_TOKEN, REFERENCE_HEADER_LENGTH, UNREFERENCED_STRING_TOKEN, REGEX_UNREFERENCED_STRING_TOKEN, ESCAPED_UNREFERENCED_STRING_TOKEN, STRING_IDENT_PREFIX, ESCAPE_CHARACTER, REGEX_ESCAPE_CHARACTER } from "../constants";
 import { Context, InvertedIndex, CompressOptions, Compressors } from "./common";
 import { ZipsonWriter } from "./writer";
 import { compressInteger } from "../util";
@@ -27,13 +27,13 @@ export function compressString(
     writer.write(`${REF_STRING_TOKEN}${foundRef}`)
   } else {
     const ref = compressInteger(invertedIndex.stringCount);
-    const newRef = `${STRING_TOKEN}${obj.replace(REGEX_STRING_TOKEN, ESCAPED_STRING_TOKEN)}${STRING_TOKEN}`;
+    const newRef = `${STRING_TOKEN}${obj.replace(REGEX_ESCAPE_CHARACTER, ESCAPE_CHARACTER + ESCAPE_CHARACTER).replace(REGEX_STRING_TOKEN, ESCAPED_STRING_TOKEN)}${STRING_TOKEN}`;
     if(ref.length + REFERENCE_HEADER_LENGTH + 1 < newRef.length) {
       invertedIndex.stringMap[stringIdent] = ref;
       invertedIndex.stringCount++;
       writer.write(newRef)
     } else {
-      writer.write(`${UNREFERENCED_STRING_TOKEN}${obj.replace(REGEX_UNREFERENCED_STRING_TOKEN, ESCAPED_UNREFERENCED_STRING_TOKEN)}${UNREFERENCED_STRING_TOKEN}`);
+      writer.write(`${UNREFERENCED_STRING_TOKEN}${obj.replace(REGEX_ESCAPE_CHARACTER, ESCAPE_CHARACTER + ESCAPE_CHARACTER).replace(REGEX_UNREFERENCED_STRING_TOKEN, ESCAPED_UNREFERENCED_STRING_TOKEN)}${UNREFERENCED_STRING_TOKEN}`);
     }
   }
 }
