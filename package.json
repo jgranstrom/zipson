@@ -1,6 +1,6 @@
 {
   "name": "zipson",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "JSON parse and stringify with compression",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
