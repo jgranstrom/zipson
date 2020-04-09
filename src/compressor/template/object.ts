@@ -164,9 +164,11 @@ function compresObjectTemplate(
   for(let i = 0; i < struct.length; i++) {
     const key = struct[i][0];
     const isNested = struct[i].length > 1;
+    const nextStruct = <TemplateStruct>struct[i][1]
+    const isNotEmpty = nextStruct && nextStruct.length > 0
     compressors.string(compressors, context, key, invertedIndex, writer, options);
-    if(isNested) {
-      compresObjectTemplate(compressors, context, invertedIndex, writer, options, <TemplateStruct>struct[i][1]);
+    if(isNested && isNotEmpty) {
+      compresObjectTemplate(compressors, context, invertedIndex, writer, options, nextStruct);
     }
   };
   writer.write(TEMPLATE_OBJECT_END);
@@ -188,8 +190,10 @@ function compressObjectValues(
     const key = struct[i][0];
     const value = obj[key];
     const isNested = struct[i].length > 1;
-    if(isNested) {
-      compressObjectValues(compressors, context, invertedIndex, writer, options, <TemplateStruct>struct[i][1], value);
+    const nextStruct = <TemplateStruct>struct[i][1]
+    const isNotEmpty = nextStruct && nextStruct.length > 0
+    if(isNested && isNotEmpty) {
+      compressObjectValues(compressors, context, invertedIndex, writer, options, nextStruct, value);
     } else {
       compressors.any(compressors, context, value, invertedIndex, writer, options);
     }
