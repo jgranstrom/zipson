@@ -24,9 +24,9 @@
   "author": "John Granström <granstrom.john@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/chai": "^4.1.2",
+    "@types/chai": "~4.1.2",
     "browserify": "^16.1.0",
-    "chai": "^4.1.2",
+    "chai": "~4.1.2",
     "chai-roughly": "^1.0.0",
     "dummy-json": "^2.0.0",
     "mocha": "^5.0.1",
