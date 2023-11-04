@@ -1,8 +1,7 @@
 # <span><img src="https://cdn.rawgit.com/jgranstrom/zipson/master/docs/icon.svg" width="30" height="30">&nbsp;zipson</span>
 
-[![Build Status](https://travis-ci.org/jgranstrom/zipson.svg?branch=master&style=flat)](https://travis-ci.org/jgranstrom/zipson)
+![CI status](https://github.com/jgranstrom/zipson/workflows/CI/badge.svg)
 [![npm version](https://badge.fury.io/js/zipson.svg)](http://badge.fury.io/js/zipson)
-[![devDependencies Status](https://david-dm.org/jgranstrom/zipson/dev-status.svg)](https://david-dm.org/jgranstrom/zipson?type=dev)
 
 Zipson is a drop-in alternative to JSON.parse/stringify with added compression and streaming support.
 
@@ -12,21 +11,22 @@ Try the [online demo](https://jgranstrom.github.io/zipson/)
 
 ---
 
-- [Installing](#installing)
-- [API](#api)
-  - [`stringify(data, options?)`](#stringifydata-options)
-  - [`stringifyTo(data, writer, options?)`](#stringifytodata-writer-options)
-  - [`parse(string)`](#parsestring)
-  - [`parseIncremental()`](#parseincremental)
-- [Options](#options)
-  - [`detectUtcTimestamps`](#detectutctimestamps)
-  - [`fullPrecisionFloats`](#fullprecisionfloats)
-- [Writer](#writer)
-- [Features](#features)
-- [Running the tests](#running-the-tests)
-- [Contributing](#contributing)
-- [Versioning](#versioning)
-- [License](#license)
+- [ zipson](#zipson)
+    - [Installing](#installing)
+    - [API](#api)
+        - [`stringify(data, options?)`](#stringifydata-options)
+        - [`stringifyTo(data, writer, options?)`](#stringifytodata-writer-options)
+        - [`parse(string)`](#parsestring)
+        - [`parseIncremental()`](#parseincremental)
+    - [Options](#options)
+        - [`detectUtcTimestamps`](#detectutctimestamps)
+        - [`fullPrecisionFloats`](#fullprecisionfloats)
+    - [Writer](#writer)
+    - [Features](#features)
+    - [Running the tests](#running-the-tests)
+    - [Contributing](#contributing)
+    - [Versioning](#versioning)
+    - [License](#license)
 
 ### Installing
 
