@@ -8,6 +8,7 @@ describe('array-mixed', function() {
       null,
       undefined,
       1029831209,
+      -1.1029831209e+123,
       { x: 123, y: { z: 'asd{f]s' }, z: [234, '{]324asd' ] },
       -5,
       0,
@@ -16,7 +17,7 @@ describe('array-mixed', function() {
       'faösodifjaosödfijasödofijasdöofijasodöfijasdoöfijasdoöfijsadoöfijsadfsdjfsadfhiarsl',
       "foaisdjfoas'dfasd'f'dfs'adfasdf'",
       'aosdifjao"oijsdfioJ"sdfoij"',
-    ]);
+    ], 0, true);
   });
 
   it('withRepititions', function() {
@@ -28,6 +29,8 @@ describe('array-mixed', function() {
       { x: 123 },
       undefined,
       1029831209,
+      -1.1029831209e-123,
+      -1.1029831209e-123,
       1,
       -5,
       { x: 123, y: { z: 'asd{f]s' }, z: [234, '{]324asd' ] },
@@ -48,6 +51,6 @@ describe('array-mixed', function() {
       1029831209,
       { x: 123 },
       1029831209,
-    ]);
+    ], 0, true);
   });
 });

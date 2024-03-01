@@ -16,7 +16,23 @@ export function compressNumber(
 ) {
   let foundRef: string | undefined;
 
-  if(obj % 1 === 0) {
+  if(obj.toString().match(/[.e]/)) {
+    // Compress float prior to lookup to reuse for "same" floating values
+    const compressedFloat = compressFloat(obj, options.fullPrecisionFloats);
+    if((foundRef = invertedIndex.floatMap[compressedFloat]) !== void 0) {
+      writer.write(`${REF_FLOAT_TOKEN}${foundRef}`)
+    } else {
+      const ref = compressInteger(invertedIndex.floatCount);
+      const newRef = `${FLOAT_TOKEN}${compressedFloat}`;
+      if(ref.length + REFERENCE_HEADER_LENGTH < newRef.length) {
+        invertedIndex.floatMap[compressedFloat] = ref;
+        invertedIndex.floatCount++;
+        writer.write(newRef)
+      } else {
+        writer.write(`${UNREFERENCED_FLOAT_TOKEN}${compressedFloat}`);
+      }
+    }
+  } else {
     // CHeck if the value is a small integer
     if(obj < INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER && obj > INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER) {
       writer.write(INTEGER_SMALL_TOKENS[obj + INTEGER_SMALL_TOKEN_ELEMENT_OFFSET]);
@@ -32,22 +48,6 @@ export function compressNumber(
         writer.write(newRef)
       } else {
         writer.write(`${UNREFERENCED_INTEGER_TOKEN}${compressedInteger}`);
-      }
-    }
-  } else {
-    // Compress float prior to lookup to reuse for "same" floating values
-    const compressedFloat = compressFloat(obj, options.fullPrecisionFloats);
-    if((foundRef = invertedIndex.floatMap[compressedFloat]) !== void 0) {
-      writer.write(`${REF_FLOAT_TOKEN}${foundRef}`)
-    } else {
-      const ref = compressInteger(invertedIndex.floatCount);
-      const newRef = `${FLOAT_TOKEN}${compressedFloat}`;
-      if(ref.length + REFERENCE_HEADER_LENGTH < newRef.length) {
-        invertedIndex.floatMap[compressedFloat] = ref;
-        invertedIndex.floatCount++;
-        writer.write(newRef)
-      } else {
-        writer.write(`${UNREFERENCED_FLOAT_TOKEN}${compressedFloat}`);
       }
     }
   }

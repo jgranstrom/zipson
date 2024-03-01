@@ -155,6 +155,30 @@ describe('scalar', function() {
     testPackUnpack(-2147483649.63423, 2, true);
   });
 
+  it('floatExponentialPositive', function() {
+    testPackUnpack(1.552345411e+123, 2, true);
+  });
+
+  it('floatSmallExponentialPositive', function() {
+    testPackUnpack(1.2e+10, 2, true);
+  });
+
+  it('floatExponentialNegative', function() {
+    testPackUnpack(1.552345411e-123, 2, true);
+  });
+
+  it('floatSmallExponentialNegative', function() {
+    testPackUnpack(1.2e-10, 2, true);
+  });
+
+  it('floatFullPrecisionExponentialPositive', function() {
+    testPackUnpack(1.552345411e+123, 2, true, {fullPrecisionFloats: true});
+  });
+
+  it('floatFullPrecisionExponentialNegative', function() {
+    testPackUnpack(1.552345411e-123, 2, true, {fullPrecisionFloats: true});
+  });
+
   it('stringShort', function() {
     testPackUnpack('a');
   });

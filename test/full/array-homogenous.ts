@@ -96,6 +96,14 @@ describe('array-homogenous', function() {
     testPackUnpackHomogeneousArray(-15.55, ONE, 2, true);
   });
 
+  it('floatExponentialOne', function() {
+    testPackUnpackHomogeneousArray(-1.552345411e+123, ONE, 2, true);
+  });
+
+  it('floatExponentialMany', function() {
+    testPackUnpackHomogeneousArray(-1.552345411e+123, MANY, 2, true);
+  });
+
   it('stringShortOne', function() {
     testPackUnpackHomogeneousArray('a', ONE);
   });

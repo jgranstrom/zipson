@@ -12,7 +12,7 @@ describe('object', function() {
   });
 
   it('mixed', function() {
-    testPackUnpack({ x: 1, y: 212301230, z: 'asdfioj{{', 'i': '', 'longkey': true, 'nope': undefined });
+    testPackUnpack({ x: 1, y: 0.212301230e-123, z: 'asdfioj{{', 'i': '', 'longkey': true, 'nope': undefined }, 0, true);
   });
 
   it('nested', function() {
@@ -23,7 +23,7 @@ describe('object', function() {
       nope: undefined,
       float: 113123.432,
       nest: {
-        x: 1, y: 212301230,
+        x: 1, y: 0.212301230e-123322,
         float: 0.312,
         z: 'asdfioj{{', 'i': '',
         longerkey: true,
@@ -35,13 +35,13 @@ describe('object', function() {
       },
       array_nest: [
         {
-          x: 1, y: 212301230,
+          x: 1, y: 0.212301230e-123322,
           z: 'asdfioj{{', 'i': '',
           longerkey: true,
           nope: undefined
         },
         {
-          x: 1, y: 212301230,
+          x: 1, y: 0.212301230e-123322,
           z: 'asdfioj{{', 'i': '',
           longerkey: true,
           nope: undefined
