@@ -16,7 +16,7 @@ export function compressNumber(
 ) {
   let foundRef: string | undefined;
 
-  if(obj % 1 === 0) {
+  if(obj % 1 === 0 && obj.toString() !== obj.toExponential()) {
     // CHeck if the value is a small integer
     if(obj < INTEGER_SMALL_EXCLUSIVE_BOUND_UPPER && obj > INTEGER_SMALL_EXCLUSIVE_BOUND_LOWER) {
       writer.write(INTEGER_SMALL_TOKENS[obj + INTEGER_SMALL_TOKEN_ELEMENT_OFFSET]);

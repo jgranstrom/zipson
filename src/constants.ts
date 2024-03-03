@@ -9,6 +9,7 @@ export const DATE_LOW_PRECISION = 100000;
  */
 export const FLOAT_FULL_PRECISION_DELIMITER = ',';
 export const FLOAT_REDUCED_PRECISION_DELIMITER = '.';
+export const FLOAT_EXPONENT_DELIMITER = '@';
 
 /**
  * Data type tokens

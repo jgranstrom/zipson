@@ -1,5 +1,8 @@
 import {
-    FLOAT_COMPRESSION_PRECISION, FLOAT_FULL_PRECISION_DELIMITER, FLOAT_REDUCED_PRECISION_DELIMITER
+  FLOAT_COMPRESSION_PRECISION,
+  FLOAT_EXPONENT_DELIMITER,
+  FLOAT_FULL_PRECISION_DELIMITER,
+  FLOAT_REDUCED_PRECISION_DELIMITER
 } from './constants';
 
 const maxInteger = 2147483648;
@@ -56,30 +59,54 @@ export function decompressInteger(compressedInteger: string): number {
  * Convert float to base62 string for integer and fraction
  */
 export function compressFloat(float: number, fullPrecision: boolean = false): string {
+  let floatString = float.toString();
+  const [mantissa, exponent] = floatString.split('e');
+
+  if (exponent) {
+    floatString = mantissa;
+  }
+
+  let result;
   if(fullPrecision) {
-    const [integer, fraction] = float.toString().split('.');
+    const [integer, fraction] = floatString.split('.');
     const operator = integer === '-0' ? '-' : '';
-    return `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
+    result = `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
   } else {
+    float = exponent ? parseFloat(floatString) : float;
     const integer = float >= maxInteger ? Math.floor(float) : float <= minInteger ? Math.ceil(float) : float << 0;
     const fraction = Math.round((FLOAT_COMPRESSION_PRECISION * (float % 1)));
-    return `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
+    result = `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
   }
+
+  if (exponent) {
+    result = `${result}${FLOAT_EXPONENT_DELIMITER}${compressInteger(parseInt(exponent))}`;
+  }
+
+  return result;
 }
 
 /**
  * Convert base62 integer and fraction to float
  */
 export function decompressFloat(compressedFloat: string): number {
-  if(compressedFloat.indexOf(FLOAT_FULL_PRECISION_DELIMITER) > -1) {
-    const [integer, fraction] = compressedFloat.split(FLOAT_FULL_PRECISION_DELIMITER);
+  const [mantissa, exponent] = compressedFloat.split(FLOAT_EXPONENT_DELIMITER);
+
+  let float;
+  if(mantissa.includes(FLOAT_FULL_PRECISION_DELIMITER)) {
+    const [integer, fraction] = mantissa.split(FLOAT_FULL_PRECISION_DELIMITER);
     const mult = integer === '-0' ? -1 : 1;
     const uncompressedInteger = decompressInteger(integer);
-    return mult * parseFloat(uncompressedInteger + '.' + fraction);
+    float = mult * parseFloat(uncompressedInteger + '.' + fraction);
   } else {
-    const [integer, fraction] = compressedFloat.split(FLOAT_REDUCED_PRECISION_DELIMITER);
+    const [integer, fraction] = mantissa.split(FLOAT_REDUCED_PRECISION_DELIMITER);
     const uncompressedInteger = decompressInteger(integer);
     const uncompressedFraction = decompressInteger(fraction);
-    return uncompressedInteger + uncompressedFraction / FLOAT_COMPRESSION_PRECISION;
+    float = uncompressedInteger + uncompressedFraction / FLOAT_COMPRESSION_PRECISION;
   }
+
+  if (exponent) {
+    float = parseFloat(`${float}e${decompressInteger(exponent)}`);
+  }
+
+  return float;
 }

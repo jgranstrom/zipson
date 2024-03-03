@@ -1,13 +1,12 @@
-import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
 import {
-    ARRAY_END_TOKEN, ARRAY_REPEAT_MANY_TOKEN, ARRAY_REPEAT_TOKEN, ARRAY_START_TOKEN,
+    ARRAY_END_TOKEN, ARRAY_START_TOKEN,
     INTEGER_SMALL_TOKEN_ELEMENT_OFFSET, INTEGER_SMALL_TOKENS, OBJECT_END_TOKEN, OBJECT_START_TOKEN,
-    STRING_TOKEN, TEMPLATE_OBJECT_END, TEMPLATE_OBJECT_FINAL, TEMPLATE_OBJECT_START, UNDEFINED_TOKEN,
+    STRING_TOKEN, TEMPLATE_OBJECT_END, TEMPLATE_OBJECT_FINAL, TEMPLATE_OBJECT_START,
     UNREFERENCED_STRING_TOKEN
 } from '../../src/constants';
-import { TestCase } from './util';
+import { TestCase } from '../test-case';
 
 const testCases = [
   new TestCase('empty',
