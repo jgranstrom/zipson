@@ -59,18 +59,20 @@ export function decompressInteger(compressedInteger: string): number {
  * Convert float to base62 string for integer and fraction
  */
 export function compressFloat(float: number, fullPrecision: boolean = false): string {
-  const [mantissa, exponent] = float.toString().split('e');
+  let floatString = float.toString();
+  const [mantissa, exponent] = floatString.split('e');
 
   if (exponent) {
-    float = parseFloat(mantissa);
+    floatString = mantissa;
   }
 
   let result;
   if(fullPrecision) {
-    const [integer, fraction] = float.toString().split('.');
+    const [integer, fraction] = floatString.split('.');
     const operator = integer === '-0' ? '-' : '';
     result = `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
   } else {
+    float = parseFloat(floatString);
     const integer = float >= maxInteger ? Math.floor(float) : float <= minInteger ? Math.ceil(float) : float << 0;
     const fraction = Math.round((FLOAT_COMPRESSION_PRECISION * (float % 1)));
     result = `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
