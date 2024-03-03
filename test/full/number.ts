@@ -48,6 +48,14 @@ const testCases = [
         [FLOAT_TOKEN, '1', FLOAT_FULL_PRECISION_DELIMITER, '23', FLOAT_EXPONENT_DELIMITER, '-1z'],
         {fullPrecisionFloats: true}
     ),
+    new TestCase('float-exp-positive',
+        1e+1,
+        [UNREFERENCED_INTEGER_TOKEN, 'A'],
+    ),
+    new TestCase('float-exp-negative',
+        1e-1,
+        [FLOAT_TOKEN, '0', FLOAT_REDUCED_PRECISION_DELIMITER, '1c'],
+    ),
 ];
 
 describe('Number', function() {
