@@ -103,7 +103,7 @@ export function decompressFloat(compressedFloat: string): number {
   }
 
   if (exponent) {
-    float *= 10 ** decompressInteger(exponent)
+    float = parseFloat(`${float}e${decompressInteger(exponent)}`);
   }
 
   return float;
