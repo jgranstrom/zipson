@@ -72,7 +72,7 @@ export function compressFloat(float: number, fullPrecision: boolean = false): st
     const operator = integer === '-0' ? '-' : '';
     result = `${operator}${compressInteger(parseInt(integer))}${FLOAT_FULL_PRECISION_DELIMITER}${fraction}`;
   } else {
-    float = parseFloat(floatString);
+    float = exponent ? parseFloat(floatString) : float;
     const integer = float >= maxInteger ? Math.floor(float) : float <= minInteger ? Math.ceil(float) : float << 0;
     const fraction = Math.round((FLOAT_COMPRESSION_PRECISION * (float % 1)));
     result = `${compressInteger(integer)}${FLOAT_REDUCED_PRECISION_DELIMITER}${compressInteger(fraction)}`;
